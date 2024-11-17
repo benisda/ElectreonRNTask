@@ -5,10 +5,9 @@ import {
     GestureDetector,
     GestureHandlerRootView,
 } from "react-native-gesture-handler";
-import { Canvas, Path } from "@shopify/react-native-skia";
+import { Canvas, makeImageFromView, Path } from "@shopify/react-native-skia";
 import { AppContext } from "../contexts/AppContext";
 import { IPath } from "../types";
-import ViewShot from "react-native-view-shot";
 
 
 export default function DrawCanva() {
@@ -23,7 +22,7 @@ export default function DrawCanva() {
                 boardFunctions: {
                     setPaths,
                     // @ts-ignore
-                    getImage: async () => await canvaRef?.current?.capture()
+                    getImage: async () => await makeImageFromView(canvaRef)
                 }
             });
         }
@@ -49,26 +48,29 @@ export default function DrawCanva() {
         .runOnJS(true);
 
     return (
-        < GestureHandlerRootView style={styles.container} >
-            <ViewShot ref={canvaRef} options={{ format: "jpg", quality: 0.9 }} style={{ flex: 1 }}>
-                <GestureDetector gesture={pan}>
-                    <View style={styles.canva}>
-                        <Canvas style={{ flex: 1 }}>
-                            {paths.map((p, index) => {
-                                return (
-                                    <Path
-                                        key={index}
-                                        path={p.segments.join(" ")}
-                                        strokeWidth={20}
-                                        style="stroke"
-                                        color={'white'}
-                                    />
-                                )
-                            })}
-                        </Canvas>
-                    </View>
-                </GestureDetector>
-            </ViewShot>
+        <GestureHandlerRootView style={styles.container} >
+
+            <View collapsable={false} style={{ flex: 1 }}>
+                <View ref={canvaRef} collapsable={false} style={{ flex: 1 }} >
+                    <GestureDetector gesture={pan}>
+                        <View style={styles.canva} collapsable={false}>
+                            <Canvas style={{ flex: 1 }}>
+                                {paths.map((p, index) => {
+                                    return (
+                                        <Path
+                                            key={index}
+                                            path={p.segments.join(" ")}
+                                            strokeWidth={20}
+                                            style="stroke"
+                                            color={'white'}
+                                        />
+                                    )
+                                })}
+                            </Canvas>
+                        </View>
+                    </GestureDetector>
+                </View>
+            </View>
         </GestureHandlerRootView >
     );
 }
@@ -76,9 +78,6 @@ export default function DrawCanva() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        borderColor: '#D0A373',
-        borderWidth: 30,
-        borderRadius: 30,
     },
     canva: {
         flex: 1,

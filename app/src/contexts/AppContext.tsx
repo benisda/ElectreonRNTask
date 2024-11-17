@@ -4,7 +4,7 @@ import { IPath } from "../types";
 type AppContextType = {
     boardFunctions?: {
         setPaths: (paths: IPath[]) => void;
-        getImage: () => Promise<string>;
+        getImage: () => Promise<any>;
     }
     setContextValue?: (value: AppContextType) => void;
 }

@@ -5,15 +5,16 @@ import Animated, { FlipInEasyX } from 'react-native-reanimated';
 
 type Props = {
     letter: string
+    size?: number
 }
 
-const LetterCard = ({ letter }: Props) => {
+const LetterCard = ({ letter, size = 130 }: Props) => {
     return (
-        <Animated.View style={styles.container} entering={FlipInEasyX}>
-            <View style={styles.card}>
+        <Animated.View style={[styles.container]} entering={FlipInEasyX}>
+            <View style={[styles.card, { width: size, height: size, borderRadius: size / 10 }]}>
                 <MyText
                     customStyle={{
-                        fontSize: 96
+                        fontSize: size * 0.75
                     }}
                 >
                     {letter}
@@ -25,14 +26,10 @@ const LetterCard = ({ letter }: Props) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20
     },
     card: {
-        width: 130,
-        height: 130,
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',

@@ -19,7 +19,8 @@ const MyText = ({ children, customStyle }: MyTextProps) => {
 
 const styles = StyleSheet.create({
     text: {
-        color: PALETTE.primary
+        color: PALETTE.primary,
+        borderColor: PALETTE.primary
     }
 })
 

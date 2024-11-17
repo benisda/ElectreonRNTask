@@ -4,22 +4,42 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Animated, { BounceInUp } from 'react-native-reanimated';
 import MyText from './MyText';
 import Button from './Button';
+import { storeData, getData, clearData } from '../utils';
+import { HISTORY_KEY } from '../consts';
+import { HistoryItemT } from '../types';
 
 type Props = PropsWithChildren<{
     isVisible: boolean;
     onClose: (reload: boolean) => void;
-    currentLetter?: string;
+    currentLetter: string;
     writtenLetter?: string;
 }>;
 
 export default function AfterSubmitModal({ isVisible, onClose, currentLetter, writtenLetter }: Props) {
     const success = currentLetter === writtenLetter;
-    console.log('success', success);
     console.log('letters', [currentLetter, writtenLetter]);
     const successEmojis = ['🎉', '👍', '🥳', '🤩', '😎', '🚀', '🌟', '🎊', '🔥',];
     const failEmojis = ['😢', '😭', '😱', '😵', '😖', '😓', '😥', '😰', '😨'];
     const [emoji, setEmoji] = useState(successEmojis[Math.floor(Math.random() * successEmojis.length)]);
-
+    useEffect(() => {
+        if (!isVisible) {
+            return;
+        }
+        (async () => {
+            const HistoryItemT: HistoryItemT = {
+                letter: currentLetter,
+                success: success,
+                date: new Date()
+            }
+            const history = await getData(HISTORY_KEY);
+            if (history) {
+                history.push(HistoryItemT);
+                await storeData(HISTORY_KEY, history);
+            } else {
+                await storeData(HISTORY_KEY, [HistoryItemT]);
+            }
+        })()
+    }, [isVisible]);
     useEffect(() => {
         if (success === undefined) {
             return;
@@ -65,7 +85,9 @@ export default function AfterSubmitModal({ isVisible, onClose, currentLetter, wr
                         </MyText>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <Button text="Close" onPress={() => onClose(success)} />
+                        <Button onPress={() => onClose(success)}>
+                            Close
+                        </Button>
                     </View>
                 </View>
             </View>
