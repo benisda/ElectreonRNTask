@@ -80,30 +80,30 @@ const Home = () => {
                 <Button variant='danger' disabled={loading} onPress={() => {
                     context?.boardFunctions?.setPaths([])
                 }}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <MaterialIcons name="clear" size={24} color={PALETTE.danger} style={{ margin: 0, padding: 0 }} />
+                    <View style={styles.buttonWrapper}>
                         <MyText customStyle={{ fontSize: 20, color: PALETTE.danger, fontWeight: 'bold' }}>
                             Clear
                         </MyText>
+                        <MaterialIcons name="clear" size={24} color={PALETTE.danger} style={{ margin: 0, padding: 0 }} />
                     </View>
                 </Button>
                 <Button variant='warning' disabled={loading} onPress={() => {
                     // @ts-ignore
                     context?.boardFunctions?.setPaths((prevPaths: IPath[]) => prevPaths.slice(0, -1))
                 }} >
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <MaterialIcons name="undo" size={24} color={PALETTE.warning} style={{ margin: 0, padding: 0 }} />
+                    <View style={styles.buttonWrapper}>
                         <MyText customStyle={{ fontSize: 20, color: PALETTE.warning, fontWeight: 'bold' }}>
                             Undo
                         </MyText>
+                        <MaterialIcons name="undo" size={24} color={PALETTE.warning} style={{ margin: 0, padding: 0 }} />
                     </View>
                 </Button>
                 <Button variant='success' disabled={loading} onPress={submitImage} >
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <MaterialIcons name="send" size={24} color={PALETTE.success} style={{ margin: 0, padding: 0 }} />
+                    <View style={styles.buttonWrapper}>
                         <MyText customStyle={{ fontSize: 20, color: PALETTE.success, fontWeight: 'bold' }}>
                             Send
                         </MyText>
+                        <MaterialIcons name="send" size={24} color={PALETTE.success} style={{ margin: 0, padding: 0 }} />
                     </View>
                 </Button>
             </View>
@@ -135,6 +135,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingBottom: DEFAULT_HORIZONTAL_PADDING
+    },
+    buttonWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5
     }
 })
 
