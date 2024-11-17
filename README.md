@@ -12,11 +12,10 @@ console.log("ASCII of a real o letter:",'o'.charCodeAt()) // 74
 console.log("ASCII of the letter recognized by the API:",'о'.charCodeAt()) // 1032 (Cyrillic)
 ```
 
-2. You asked to store the API key securely in the application but there is no way to store the API key securely in a React Native application, because the JavaScript code is not secure and can be easily decompiled and read by anyone.
-[Please take a look at this (in second paragraph)](https://reactnative.dev/docs/security#storing-sensitive-info)
-
-Here I see 2 solutions :
-**a**. Use a server to make the requests to the API and then send the data to the client. You can then control and check the requests.
+2. You asked to store the API key securely in the application but there is no way to store the API key securely in a React Native application, because the JavaScript code is not secure and can be easily decompiled and read by anyone.<br>
+[Please take a look at this (in second paragraph)](https://reactnative.dev/docs/security#storing-sensitive-info)<br>
+Here I see 2 solutions :<br>
+**a**. Use a server to make the requests to the API and then send the data to the client. You can then control and check the requests.<br>
 **b**. Use a service like Firebase App Check, which can be used to verify that the requests are coming from your app and not from a malicious source.
 
 ## How to run the project
