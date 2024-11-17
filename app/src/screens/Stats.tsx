@@ -1,5 +1,5 @@
-import { View, Text, FlatList, StyleSheet, Platform } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
+import { View, FlatList, StyleSheet, Platform } from 'react-native'
+import React, { useCallback, useState } from 'react'
 import { HistoryItemT } from '../types';
 import { getData } from '../utils';
 import { DEFAULT_HORIZONTAL_PADDING, HISTORY_KEY } from '../consts';
@@ -13,7 +13,6 @@ const Stats = () => {
     useFocusEffect(useCallback(() => {
         (async () => {
             let history = await getData(HISTORY_KEY);
-            console.log('history', [history, history ?? []]);
             setHistory(history ?? []);
         })()
     }, []));
@@ -24,13 +23,14 @@ const Stats = () => {
                 <MyText customStyle={{ fontSize: 48, fontWeight: 100, textAlign: 'center' }}>Statistics</MyText>
             </Animated.View>
             <View style={styles.firstRow}>
+                {/* some Android devices will crash without the Platform.select check */}
                 <Animated.View style={styles.card} key={Math.random()} entering={Platform.select({ ios: BounceInLeft, android: undefined })}>
                     <MyText customStyle={{ fontWeight: 'bold', fontSize: 18 }}>Attempts</MyText>
                     <MyText customStyle={{ fontSize: 48 }}>{history.length}</MyText>
                 </Animated.View>
                 <Animated.View style={styles.card} key={Math.random()} entering={Platform.select({ ios: BounceInRight, android: undefined })}>
                     <MyText customStyle={{ fontWeight: 'bold', fontSize: 18 }}>Success</MyText>
-                    <MyText customStyle={{ fontSize: 48 }}>{successRate}%</MyText>
+                    <MyText customStyle={{ fontSize: 36 }}>{successRate}%</MyText>
                 </Animated.View>
             </View>
             <Animated.View entering={BounceInDown} key={Math.random()} style={styles.listContainer}>

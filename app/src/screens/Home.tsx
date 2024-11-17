@@ -4,13 +4,13 @@ import DrawCanva from '../components/DrawCanva'
 import { API_KEY, API_URL, DEFAULT_HORIZONTAL_PADDING, PALETTE } from '../consts'
 import Button from '../components/Button'
 import { AppContext } from '../contexts/AppContext'
-import * as FileSystem from 'expo-file-system'
 import { IPath } from '../types'
 import AfterSubmitModal from '../components/AfterSubmitModal'
 import LetterCard from '../components/LetterCard'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MyText from '../components/MyText'
 import { useFocusEffect } from 'expo-router'
+
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 const Home = () => {

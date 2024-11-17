@@ -8,9 +8,7 @@ export const PALETTE = {
     backgroundColor: '#f0f0f0'
 };
 
-export const DEFAULT_HORIZONTAL_PADDING = 16;
-
 export const API_URL = 'https://ck56l1mg01.execute-api.eu-west-1.amazonaws.com/Prod/process/';
 export const API_KEY = 'y05WyMBxVE8APmqhXROE08rZdSzvvhUQ9tR0ROnk';
-
+export const DEFAULT_HORIZONTAL_PADDING = 16;
 export const HISTORY_KEY = 'history';

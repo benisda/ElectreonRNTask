@@ -4,7 +4,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Animated, { BounceInUp } from 'react-native-reanimated';
 import MyText from './MyText';
 import Button from './Button';
-import { storeData, getData, clearData } from '../utils';
+import { storeData, getData } from '../utils';
 import { HISTORY_KEY } from '../consts';
 import { HistoryItemT } from '../types';
 
@@ -17,7 +17,6 @@ type Props = PropsWithChildren<{
 
 export default function AfterSubmitModal({ isVisible, onClose, currentLetter, writtenLetter }: Props) {
     const success = currentLetter === writtenLetter;
-    console.log('letters', [currentLetter, writtenLetter]);
     const successEmojis = ['🎉', '👍', '🥳', '🤩', '😎', '🚀', '🌟', '🎊', '🔥',];
     const failEmojis = ['😢', '😭', '😱', '😵', '😖', '😓', '😥', '😰', '😨'];
     const [emoji, setEmoji] = useState(successEmojis[Math.floor(Math.random() * successEmojis.length)]);

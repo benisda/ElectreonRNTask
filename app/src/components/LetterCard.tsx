@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import React from 'react'
 import MyText from './MyText';
 import Animated, { FlipInEasyX } from 'react-native-reanimated';
